@@ -20,20 +20,20 @@ public class AnimeResponseRepresentation {
     @JsonProperty("id")
     private Long id;
 
-    @JsonProperty("nome")
-    private String nome;
+    @JsonProperty("name")
+    private String name;
 
-    @JsonProperty("autor")
-    private String autor;
+    @JsonProperty("author")
+    private String author;
 
-    @JsonProperty("publicacao")
-    private int publicacao;
+    @JsonProperty("yearPublication")
+    private int yearPublication;
 
-    @JsonProperty("numeroEpisodios")
-    private int numeroEpisodios;
+    @JsonProperty("episodesNumber")
+    private int episodesNumber;
 
-    @JsonProperty("sinopse")
-    private String sinopse;
+    @JsonProperty("synopsis")
+    private String synopsis;
 
     @JsonProperty("tipoGenero")
     private TipoGeneroRepresentation tipoGenero;

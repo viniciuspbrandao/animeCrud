@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "anime")
+@Table(name = "tbl_anime")
 public class AnimeEntity {
 
     @Id
@@ -33,20 +33,20 @@ public class AnimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome", nullable = false, length = 50)
-    private String nome;
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
 
-    @Column(name = "autor", nullable = false, length = 50)
-    private String autor;
+    @Column(name = "author", nullable = false, length = 50)
+    private String author;
 
-    @Column(name = "publicacao")
-    private int publicacao;
+    @Column(name = "year_publication")
+    private int yearPublication;
 
-    @Column(name = "numero_episodios")
-    private int numeroEpisodios;
+    @Column(name = "episodes_number")
+    private int episodesNumber;
 
-    @Column(name = "sinopse", columnDefinition = "TEXT")
-    private String sinopse;
+    @Column(name = "synopsis", columnDefinition = "TEXT")
+    private String synopsis;
 
     @Enumerated(EnumType.STRING)
     private TipoGenero tipoGenero;

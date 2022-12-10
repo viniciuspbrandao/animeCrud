@@ -27,7 +27,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Controle de Animes")
+                .title("API to Register Anime")
                 .version("0.1")
                 .contact(new Contact("animescrud.application", "", "animescrud@application.com.br"))
                 .build();

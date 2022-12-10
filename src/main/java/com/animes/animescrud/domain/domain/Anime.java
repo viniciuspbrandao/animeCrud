@@ -18,11 +18,11 @@ import lombok.ToString;
 public class Anime {
 
     private Long id;
-    private String nome;
-    private String autor;
-    private int anoPublicacao;
-    private int numeroEpisodios;
-    private String sinopse;
+    private String name;
+    private String author;
+    private int yearPublication;
+    private int episodesNumber;
+    private String synopsis;
     private TipoGenero tipoGenero;
 
 }

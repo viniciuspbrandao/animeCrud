@@ -16,33 +16,38 @@ public class AnimeMapper {
 
     private final Supplier<ModelMapper> modelMapperSupplier = ModelMapper::new;
 
-    public Anime paraDominio(AnimeRequestRepresentation representation) {
+    public Anime toDomain(AnimeRequestRepresentation representation) {
         return modelMapperSupplier.get().map(representation, Anime.class);
     }
 
-    public AnimeResponseRepresentation paraRepresentacao(Anime anime){
+    //do domain(service) para representation(espelho do que o usuario recebe de resposta)
+    public AnimeResponseRepresentation toRepresentation(Anime anime) {
         return modelMapperSupplier.get().map(anime, AnimeResponseRepresentation.class);
     }
 
-    public AnimeEntity paraEntity(Anime anime) {
+    public AnimeEntity toEntity(Anime anime) {
+
         return modelMapperSupplier.get().map(anime, AnimeEntity.class);
     }
 
-    public Anime entityParaDominio(AnimeEntity entity) {
+    public Anime entityToDomain(AnimeEntity entity) {
+
         return modelMapperSupplier.get().map(entity, Anime.class);
     }
 
+    // do list<anime> -> Domain para list<animeResponseRepresentation> -> Representation
     public List<AnimeResponseRepresentation> toAnimeResponseRepresentationList(List<Anime> animeList) {
         List<AnimeResponseRepresentation> animeRepresentationList = new ArrayList<>();
         for (Anime anime : animeList) {
-            animeRepresentationList.add(paraRepresentacao(anime));
+            animeRepresentationList.add(toRepresentation(anime));
         }
         return animeRepresentationList;
     }
+
     public List<Anime> toDomainList(List<AnimeEntity> animeEntityList) {
         List<Anime> animeList = new ArrayList<>();
         for (AnimeEntity animeEntity : animeEntityList) {
-            animeList.add(entityParaDominio(animeEntity));
+            animeList.add(entityToDomain(animeEntity));
         }
         return animeList;
     }

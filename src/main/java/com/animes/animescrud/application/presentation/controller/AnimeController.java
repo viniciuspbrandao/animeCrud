@@ -26,42 +26,43 @@ public class AnimeController {
     }
 
 
-    @PostMapping(path = "/salvar")
-    public ResponseEntity<AnimeResponseRepresentation> inserirNovoAnime(@RequestBody AnimeRequestRepresentation body) {
-        var anime = animeService.addAnime(AnimeMapper.paraDominio(body));
+    @PostMapping(path = "/new")
+    public ResponseEntity<AnimeResponseRepresentation> saveNewAnime(@RequestBody AnimeRequestRepresentation body) {
+        var anime = animeService.addAnime(AnimeMapper.toDomain(body));
         if (nonNull(anime)) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(AnimeMapper.paraRepresentacao(anime));
+            return ResponseEntity.status(HttpStatus.CREATED).body(AnimeMapper.toRepresentation(anime));
         }
         return ResponseEntity.badRequest().build();
     }
-    @GetMapping(path = "/listarAnimes")
-    public ResponseEntity<List<AnimeResponseRepresentation>> listarAnimes(){
+
+    @GetMapping(path = "/")
+    public ResponseEntity<List<AnimeResponseRepresentation>> listAnimes() {
         var animeList = animeService.getAnime();
         var animeRepresentationList = AnimeMapper.toAnimeResponseRepresentationList(animeList);
-        return  ResponseEntity.ok(animeRepresentationList);
+        return ResponseEntity.ok(animeRepresentationList);
     }
 
-    @GetMapping(path ="/{id}")
-    public ResponseEntity<AnimeResponseRepresentation> getAnimeById(@PathVariable(value = "id") Long id){
-        var anime = animeService.getAnimeById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(AnimeMapper.paraRepresentacao(anime));
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<AnimeResponseRepresentation> searchAnimeById(@PathVariable(value = "id") Long id) {
+        var anime = animeService.searchAnimeById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(AnimeMapper.toRepresentation(anime));
     }
+
     @PutMapping(path = "/{id}")
-    public ResponseEntity<AnimeResponseRepresentation> atualizarAnime(
+    public ResponseEntity<AnimeResponseRepresentation> updateAnime(
             @PathVariable(value = "id") Long id,
             @RequestBody AnimeRequestRepresentation body) {
 
-        var animeUpdated = animeService.updateAnime(id, AnimeMapper.paraDominio(body));
+        var animeUpdated = animeService.updateAnime(id, AnimeMapper.toDomain(body));
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(AnimeMapper.paraRepresentacao(animeUpdated));
+        return ResponseEntity.status(HttpStatus.CREATED).body(AnimeMapper.toRepresentation(animeUpdated));
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletarAnime(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> removeAnime(@PathVariable(value = "id") Long id) {
         animeService.deletarAnime(id);
         return ResponseEntity.ok().build();
     }
-
 }
 

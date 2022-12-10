@@ -25,7 +25,7 @@ public class AnimeService {
 
     }
 
-    public Anime getAnimeById(Long id){
+    public Anime searchAnimeById(Long id) {
         try {
             return this.animeRepository.getAnimeById(id);
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class AnimeService {
 
     }
 
-    public Anime addAnime (Anime anime){
+    public Anime addAnime(Anime anime) {
         try {
             return this.animeRepository.addAnime(anime);
         } catch (Exception e) {

@@ -35,9 +35,9 @@ public class AnimeRepositoryImpl implements AnimeRepository {
     @Override
     public Anime getAnimeById(Long id) {
         var animeEntity = animeJpa.findById(id);
-        if(animeEntity.isPresent()){
+        if (animeEntity.isPresent()) {
 
-            return AnimeMapper.entityParaDominio(animeEntity.get());
+            return AnimeMapper.entityToDomain(animeEntity.get());
         }
         return null;
 
@@ -46,21 +46,22 @@ public class AnimeRepositoryImpl implements AnimeRepository {
     @Override
     public Anime addAnime(Anime anime) {
         try {
-            var animeEntity = animeJpa.save(AnimeMapper.paraEntity(anime));
-            return AnimeMapper.entityParaDominio(animeEntity);
+            var animeEntity = animeJpa.save(AnimeMapper.toEntity(anime));
+            return AnimeMapper.entityToDomain(animeEntity);
         } catch (Exception e) {
             log.error("Error when trying to save an anime.", anime, e);
             throw e;
         }
     }
+
     @Override
     public Anime updateAnime(Long id, Anime anime) throws HttpStatusCodeException {
-        var animeEntityById= animeJpa.findById(id);
+        var animeEntityById = animeJpa.findById(id);
 
         if (animeEntityById.isPresent()) {
             anime.setId(animeEntityById.get().getId());
-            var animeEntity = animeJpa.save(AnimeMapper.paraEntity(anime));
-            return AnimeMapper.entityParaDominio(animeEntity);
+            var animeEntity = animeJpa.save(AnimeMapper.toEntity(anime));
+            return AnimeMapper.entityToDomain(animeEntity);
         }
 
         throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Anime doesn't exist");

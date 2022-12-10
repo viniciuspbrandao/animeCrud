@@ -10,7 +10,6 @@ public class AnimeConfig {
 
     @Bean
     public AnimeService animeService(AnimeRepository animeRepository) {
-
         return new AnimeService(animeRepository);
     }
 
