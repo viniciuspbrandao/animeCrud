@@ -1,10 +1,5 @@
-package com.animes.animescrud.domain.enums;
+package com.animes.animescrud.domain.model;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@Getter
-@RequiredArgsConstructor
 public enum TipoGenero {
 
     SHOUJO("Shoujo"),
@@ -17,4 +12,11 @@ public enum TipoGenero {
 
     private final String tipo;
 
+    TipoGenero(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
 }

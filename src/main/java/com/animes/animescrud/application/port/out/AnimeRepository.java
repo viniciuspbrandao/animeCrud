@@ -1,7 +1,6 @@
-package com.animes.animescrud.domain.port;
+package com.animes.animescrud.application.port.out;
 
-
-import com.animes.animescrud.domain.domain.Anime;
+import com.animes.animescrud.domain.model.Anime;
 
 import java.util.List;
 

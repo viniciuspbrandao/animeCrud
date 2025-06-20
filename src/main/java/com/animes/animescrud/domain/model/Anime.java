@@ -1,6 +1,4 @@
-package com.animes.animescrud.domain.domain;
-
-import com.animes.animescrud.domain.enums.TipoGenero;
+package com.animes.animescrud.domain.model;
 
 public class Anime {
 

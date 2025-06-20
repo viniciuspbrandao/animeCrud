@@ -1,6 +1,6 @@
-package com.animes.animescrud.application.repository.jpa.entity;
+package com.animes.animescrud.adapters.out.persistence.jpa;
 
-import com.animes.animescrud.domain.enums.TipoGenero;
+import com.animes.animescrud.domain.model.TipoGenero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

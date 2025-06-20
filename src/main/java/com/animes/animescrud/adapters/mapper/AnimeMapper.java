@@ -1,9 +1,9 @@
-package com.animes.animescrud.application.mapper;
+package com.animes.animescrud.adapters.mapper;
 
-import com.animes.animescrud.application.presentation.representation.AnimeRequestRepresentation;
-import com.animes.animescrud.application.presentation.representation.AnimeResponseRepresentation;
-import com.animes.animescrud.application.repository.jpa.entity.AnimeEntity;
-import com.animes.animescrud.domain.domain.Anime;
+import com.animes.animescrud.adapters.dto.AnimeRequestDTO;
+import com.animes.animescrud.adapters.dto.AnimeResponseDTO;
+import com.animes.animescrud.adapters.out.persistence.jpa.AnimeEntity;
+import com.animes.animescrud.domain.model.Anime;
 import lombok.experimental.UtilityClass;
 import org.apache.logging.log4j.util.Supplier;
 import org.modelmapper.ModelMapper;
@@ -16,13 +16,13 @@ public class AnimeMapper {
 
     private final Supplier<ModelMapper> modelMapperSupplier = ModelMapper::new;
 
-    public Anime toDomain(AnimeRequestRepresentation representation) {
+    public Anime toDomain(AnimeRequestDTO representation) {
         return modelMapperSupplier.get().map(representation, Anime.class);
     }
 
     //do domain(service) para representation(espelho do que o usuario recebe de resposta)
-    public AnimeResponseRepresentation toRepresentation(Anime anime) {
-        return modelMapperSupplier.get().map(anime, AnimeResponseRepresentation.class);
+    public AnimeResponseDTO toRepresentation(Anime anime) {
+        return modelMapperSupplier.get().map(anime, AnimeResponseDTO.class);
     }
 
     public AnimeEntity toEntity(Anime anime) {
@@ -36,8 +36,8 @@ public class AnimeMapper {
     }
 
     // do list<anime> -> Domain para list<animeResponseRepresentation> -> Representation
-    public List<AnimeResponseRepresentation> toAnimeResponseRepresentationList(List<Anime> animeList) {
-        List<AnimeResponseRepresentation> animeRepresentationList = new ArrayList<>();
+    public List<AnimeResponseDTO> toAnimeResponseRepresentationList(List<Anime> animeList) {
+        List<AnimeResponseDTO> animeRepresentationList = new ArrayList<>();
         for (Anime anime : animeList) {
             animeRepresentationList.add(toRepresentation(anime));
         }

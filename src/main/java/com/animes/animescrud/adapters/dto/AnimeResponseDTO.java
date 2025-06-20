@@ -1,6 +1,6 @@
-package com.animes.animescrud.application.presentation.representation;
+package com.animes.animescrud.adapters.dto;
 
-import com.animes.animescrud.application.presentation.representation.enums.TipoGeneroRepresentation;
+import com.animes.animescrud.adapters.dto.enums.TipoGeneroDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AnimeResponseRepresentation {
+public class AnimeResponseDTO {
 
     @JsonProperty("id")
     private Long id;
@@ -36,6 +36,6 @@ public class AnimeResponseRepresentation {
     private String synopsis;
 
     @JsonProperty("tipoGenero")
-    private TipoGeneroRepresentation tipoGenero;
+    private TipoGeneroDTO tipoGenero;
 
 }

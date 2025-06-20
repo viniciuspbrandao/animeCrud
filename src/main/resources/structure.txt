@@ -1,0 +1,43 @@
+animescrud
+│   AnimesCrudApplication.java
+│
+├── config                      ← Configurações externas da aplicação
+│   ├── AnimeConfig.java
+│   └── SwaggerConfig.java
+│
+├── domain                      ← Núcleo da aplicação (modelo e regras)
+│   ├── model
+│   │   ├── Anime.java
+│   │   └── TipoGenero.java
+│   └── service
+│       └── AnimeService.java
+│
+├── application                 ← Casos de uso e portas
+│   └── port
+│       ├── in                  ← Portas de entrada (interface de uso)
+│       │   └── AnimeUseCase.java (se quiser introduzir)
+│       └── out                 ← Portas de saída (interfaces para repositórios)
+│           └── AnimeRepository.java
+│
+├── adapters
+│   ├── in
+│   │   └── rest                ← Implementação das portas de entrada
+│   │       └── AnimeController.java
+│   │
+│   ├── out
+│   │   └── persistence         ← Implementação das portas de saída
+│   │       ├── jpa
+│   │       │   ├── AnimeEntity.java
+│   │       │   └── AnimeJpa.java
+│   │       └── AnimeRepositoryImpl.java
+│   │
+│   ├── mapper                  ← Conversões entre domínio e DTOs
+│   │   └── AnimeMapper.java
+│   │
+│   └── dto                     ← Representações de entrada/saída da API
+│       ├── request
+│       │   └── AnimeRequestDTO.java
+│       ├── response
+│       │   └── AnimeResponseDTO.java
+│       └── enums
+│           └── TipoGeneroDTO.java

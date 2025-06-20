@@ -1,14 +1,16 @@
 package com.animes.animescrud.domain.service;
 
-import com.animes.animescrud.domain.domain.Anime;
-import com.animes.animescrud.domain.port.AnimeRepository;
-import lombok.extern.slf4j.Slf4j;
+import com.animes.animescrud.application.port.in.AnimeUseCase;
+import com.animes.animescrud.domain.model.Anime;
+import com.animes.animescrud.application.port.out.AnimeRepository;
 
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.List;
 
-@Slf4j
-public class AnimeService {
+
+public class AnimeService implements AnimeUseCase {
+    private static final Logger logger = Logger.getLogger(AnimeService.class.getName());
     private final AnimeRepository animeRepository;
 
     public AnimeService(AnimeRepository animeRepository) {
@@ -19,7 +21,7 @@ public class AnimeService {
         try {
             return this.animeRepository.getAnime();
         } catch (Exception e) {
-            log.error("Error when trying to GET an anime.", e);
+            logger.log(Level.SEVERE, "Error when trying to GET an anime.", e);
             throw e;
         }
 
@@ -29,7 +31,7 @@ public class AnimeService {
         try {
             return this.animeRepository.getAnimeById(id);
         } catch (Exception e) {
-            log.error("Error when trying to GetById an anime.", e);
+            logger.log(Level.SEVERE, "Error when trying to GetById an anime.", e);
             throw e;
         }
 
@@ -39,7 +41,7 @@ public class AnimeService {
         try {
             return this.animeRepository.addAnime(anime);
         } catch (Exception e) {
-            log.error("Error when trying to save an anime.", anime, e);
+            logger.log(Level.SEVERE, "Error when trying to save an anime.", e);
             throw e;
         }
 
@@ -49,16 +51,16 @@ public class AnimeService {
         try {
             return this.animeRepository.updateAnime(id, anime);
         } catch (Exception e) {
-            log.error("The anime doesn't exist", e);
+            logger.log(Level.SEVERE, "The anime doesn't exist", e);
             throw e;
         }
     }
 
-    public void deletarAnime(Long id) {
+    public void deleteAnime(Long id) {
         try {
             this.animeRepository.deleteAnime(id);
         } catch (Exception e) {
-            log.error("The anime doesn't exist", e);
+            logger.log(Level.SEVERE, "The anime doesn't exist", e);
             throw e;
         }
     }

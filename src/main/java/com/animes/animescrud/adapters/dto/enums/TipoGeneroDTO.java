@@ -1,11 +1,11 @@
-package com.animes.animescrud.application.presentation.representation.enums;
+package com.animes.animescrud.adapters.dto.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum TipoGeneroRepresentation {
+public enum TipoGeneroDTO {
 
     SHOUJO("Shoujo"),
     SEINEN("Seinen"),

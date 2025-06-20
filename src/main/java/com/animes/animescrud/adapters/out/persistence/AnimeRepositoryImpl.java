@@ -1,9 +1,9 @@
-package com.animes.animescrud.application.repository;
+package com.animes.animescrud.adapters.out.persistence;
 
-import com.animes.animescrud.application.mapper.AnimeMapper;
-import com.animes.animescrud.application.repository.jpa.AnimeJpa;
-import com.animes.animescrud.domain.domain.Anime;
-import com.animes.animescrud.domain.port.AnimeRepository;
+import com.animes.animescrud.adapters.mapper.AnimeMapper;
+import com.animes.animescrud.adapters.out.persistence.jpa.AnimeJpa;
+import com.animes.animescrud.domain.model.Anime;
+import com.animes.animescrud.application.port.out.AnimeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

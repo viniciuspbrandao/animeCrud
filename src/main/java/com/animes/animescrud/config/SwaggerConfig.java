@@ -1,9 +1,7 @@
-package com.animes.animescrud.application.config;
-
+package com.animes.animescrud.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -20,7 +18,8 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.animes.animescrud.application.presentation.controller"))
+                .apis(RequestHandlerSelectors.basePackage(
+                        "com.animes.animescrud.adapters.in.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

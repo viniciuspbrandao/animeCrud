@@ -1,9 +1,9 @@
-package com.animes.animescrud.application.presentation.controller;
+package com.animes.animescrud.adapters.in.controller;
 
-import com.animes.animescrud.application.mapper.AnimeMapper;
-import com.animes.animescrud.application.presentation.representation.AnimeRequestRepresentation;
-import com.animes.animescrud.application.presentation.representation.AnimeResponseRepresentation;
-import com.animes.animescrud.domain.service.AnimeService;
+import com.animes.animescrud.adapters.mapper.AnimeMapper;
+import com.animes.animescrud.adapters.dto.AnimeRequestDTO;
+import com.animes.animescrud.adapters.dto.AnimeResponseDTO;
+import com.animes.animescrud.application.port.in.AnimeUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,17 +18,13 @@ import static java.util.Objects.nonNull;
 @RequestMapping("/animes")
 @RequiredArgsConstructor
 public class AnimeController {
+
     @Autowired
-    private AnimeService animeService;
-
-    public AnimeController(AnimeService animeService) {
-        this.animeService = animeService;
-    }
-
+    private final AnimeUseCase animeUseCase;
 
     @PostMapping(path = "/new")
-    public ResponseEntity<AnimeResponseRepresentation> saveNewAnime(@RequestBody AnimeRequestRepresentation body) {
-        var anime = animeService.addAnime(AnimeMapper.toDomain(body));
+    public ResponseEntity<AnimeResponseDTO> saveNewAnime(@RequestBody AnimeRequestDTO body) {
+        var anime = animeUseCase.addAnime(AnimeMapper.toDomain(body));
         if (nonNull(anime)) {
             return ResponseEntity.status(HttpStatus.CREATED).body(AnimeMapper.toRepresentation(anime));
         }
@@ -36,24 +32,24 @@ public class AnimeController {
     }
 
     @GetMapping(path = "/")
-    public ResponseEntity<List<AnimeResponseRepresentation>> listAnimes() {
-        var animeList = animeService.getAnime();
+    public ResponseEntity<List<AnimeResponseDTO>> listAnimes() {
+        var animeList = animeUseCase.getAnime();
         var animeRepresentationList = AnimeMapper.toAnimeResponseRepresentationList(animeList);
         return ResponseEntity.ok(animeRepresentationList);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<AnimeResponseRepresentation> searchAnimeById(@PathVariable(value = "id") Long id) {
-        var anime = animeService.searchAnimeById(id);
+    public ResponseEntity<AnimeResponseDTO> searchAnimeById(@PathVariable(value = "id") Long id) {
+        var anime = animeUseCase.searchAnimeById(id);
         return ResponseEntity.status(HttpStatus.OK).body(AnimeMapper.toRepresentation(anime));
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<AnimeResponseRepresentation> updateAnime(
+    public ResponseEntity<AnimeResponseDTO> updateAnime(
             @PathVariable(value = "id") Long id,
-            @RequestBody AnimeRequestRepresentation body) {
+            @RequestBody AnimeRequestDTO body) {
 
-        var animeUpdated = animeService.updateAnime(id, AnimeMapper.toDomain(body));
+        var animeUpdated = animeUseCase.updateAnime(id, AnimeMapper.toDomain(body));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(AnimeMapper.toRepresentation(animeUpdated));
 
@@ -61,7 +57,7 @@ public class AnimeController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> removeAnime(@PathVariable(value = "id") Long id) {
-        animeService.deletarAnime(id);
+        animeUseCase.deleteAnime(id);
         return ResponseEntity.ok().build();
     }
 }

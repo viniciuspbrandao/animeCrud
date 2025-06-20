@@ -1,6 +1,6 @@
-package com.animes.animescrud.application.config;
+package com.animes.animescrud.config;
 
-import com.animes.animescrud.domain.port.AnimeRepository;
+import com.animes.animescrud.application.port.out.AnimeRepository;
 import com.animes.animescrud.domain.service.AnimeService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
