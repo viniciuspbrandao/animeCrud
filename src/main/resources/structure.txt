@@ -15,7 +15,7 @@ animescrud
 ├── application                 ← Casos de uso e portas
 │   └── port
 │       ├── in                  ← Portas de entrada (interface de uso)
-│       │   └── AnimeUseCase.java (se quiser introduzir)
+│       │   └── AnimeUseCase.java
 │       └── out                 ← Portas de saída (interfaces para repositórios)
 │           └── AnimeRepository.java
 │
