@@ -4,6 +4,8 @@ import com.animes.animescrud.adapters.mapper.AnimeMapper;
 import com.animes.animescrud.adapters.dto.AnimeRequestDTO;
 import com.animes.animescrud.adapters.dto.AnimeResponseDTO;
 import com.animes.animescrud.application.port.in.AnimeUseCase;
+
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +34,7 @@ public class AnimeController {
     }
 
     @GetMapping(path = "/")
+    @Operation(summary = "List all anime")
     public ResponseEntity<List<AnimeResponseDTO>> listAnimes() {
         var animeList = animeUseCase.getAnime();
         var animeRepresentationList = AnimeMapper.toAnimeResponseRepresentationList(animeList);
@@ -39,12 +42,14 @@ public class AnimeController {
     }
 
     @GetMapping(path = "/{id}")
+    @Operation(summary = "List anime by ID")
     public ResponseEntity<AnimeResponseDTO> searchAnimeById(@PathVariable(value = "id") Long id) {
         var anime = animeUseCase.searchAnimeById(id);
         return ResponseEntity.status(HttpStatus.OK).body(AnimeMapper.toRepresentation(anime));
     }
 
     @PutMapping(path = "/{id}")
+    @Operation(summary = "Update the anime")
     public ResponseEntity<AnimeResponseDTO> updateAnime(
             @PathVariable(value = "id") Long id,
             @RequestBody AnimeRequestDTO body) {
@@ -56,6 +61,7 @@ public class AnimeController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete the anime")
     public ResponseEntity<?> removeAnime(@PathVariable(value = "id") Long id) {
         animeUseCase.deleteAnime(id);
         return ResponseEntity.ok().build();
